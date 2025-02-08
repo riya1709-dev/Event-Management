@@ -9,6 +9,7 @@ const App = () => {
     <div  className='text-3xl'>
       <Router>
         <Routes>
+          <Route path="/" exact element={<Root/>} />
           <Route path="/dashboard" exact element={<Home/>} />
           <Route path="/login" exact element={<Login/>} />
           <Route path="/signup" exact element={<SignUp/>} />
@@ -17,5 +18,13 @@ const App = () => {
     </div>
   );
 }
-
+//defne root component to handle initial redirect
+const Root=()=>{
+  const isAuthenticated= !!localStorage.getItem("token");
+  return isAuthenticated? (
+    <Navigate to="/dashboard" />
+  ):(
+    <Navigate to="/login" />
+  )
+}
 export default App;
